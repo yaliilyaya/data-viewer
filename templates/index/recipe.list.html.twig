@@ -1,0 +1,122 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Название{% endblock %}
+
+{% block page_content %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Рецепты</h3>
+            <div class="card-tools">
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="tab-content" id="custom-content-below-tabContent">
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="10">№ п/п</th>
+                            <th width="20">Ресурс</th>
+                            <th>Рецепт</th>
+                            <th>Здание</th>
+                            <th>Время</th>
+                            <th>Входной модуль</th>
+                            <th>Size In</th>
+                            <th>Выходной модуль</th>
+                            <th>Size Out</th>
+                            <th>Модуль производства</th>
+                            <th>Size Box</th>
+                            <th>Вход</th>
+                            <th>Выход</th>
+                            <th width="80">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, recipe in recipes %}
+                            <tr>
+                                <td>#{{ recipe.id }}</td>
+                                <td>
+                                    <img src="{{ recipe.item.img }}" width="30" height="30">
+                                    <a href="{{ path('detail', {id: recipe.item.id}) }}">{{ recipe.item.label }}</a>
+                                </td>
+                                <td>{{ recipe.label }}</td>
+                                <td>{{ recipe.factory }} </td>
+                                <td>{{ recipe.time }}c </td>
+                                <td></td>
+                                <td>i{{ recipe.sizeIn }}</td>
+                                <td></td>
+                                <td>i{{ recipe.sizeOut }}</td>
+                                <td>
+                                    {% for category in recipe.categories %}
+                                        <div>{{ category }}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>b{{ recipe.sizeBox }}</td>
+                                <td>
+                                    {% set stream = recipe.recipeInStreams[0] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Вход 1'
+                                    } %}
+                                    {% set stream = recipe.recipeInStreams[1] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Вход 2'
+                                    } %}
+                                    {% set stream = recipe.recipeInStreams[2] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Вход 3'
+                                    } %}
+                                    {% set stream = recipe.recipeInStreams[3] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Вход 4'
+                                    } %}
+                                </td>
+                                <td>
+                                    {% set stream = recipe.recipeOutStreams[0] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Выход 1'
+                                    } %}
+                                    {% set stream = recipe.recipeOutStreams[1] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Выход 2'
+                                    } %}
+                                    {% set stream = recipe.recipeOutStreams[2] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Вход 3'
+                                    } %}
+                                    {% set stream = recipe.recipeOutStreams[3] | default %}
+                                    {% include 'item/stream.detail.html.twig' with {
+                                        stream: stream,
+                                        label: 'Вход 4'
+                                    } %}
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ path('parse.item', {id: recipe.item.id}) }}"  class="btn btn-info btn-sm">
+                                            <span class="fas fa-upload"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby=""></div>
+                <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby=""></div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

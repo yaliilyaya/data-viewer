@@ -1,0 +1,14 @@
+{% if stream %}
+    <div style="width: 250px">
+        <div><b>{{ label | default }}</b></div>
+        <img src="{{ stream.item.img }}" width="30" height="30" title="{{ stream.item.label }}">
+        <span class="label label-info" title="Количество в рецепте">x {{ stream.count }}{{ stream.itemType }}</span>
+        i<span class="label label-info" title="Количество входов/выходов">{{ stream.countCell }}</span>
+        /
+        <span class="label label-info" title="Вес">{{ stream.weight }}</span>
+
+        time:<span class="label label-info" title="Скорость поставки на 1 штуку ">{{ stream.time }}с </span>
+        /
+        <span class="label label-info" title="Количество в минуту, {{ stream.itemType }}/мин">{{ stream.countTime }}</span>
+    </div>
+{% endif %}

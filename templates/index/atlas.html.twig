@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Атлас иконок{% endblock %}
+
+{% block page_content %}
+    <div style="width: 1020px" class="atlas-box">
+        {% for key, item in items %}
+            <img src="{{ path('img.item', {id: item.id}) }}" alt="{{ item.label }}">
+        {% endfor %}
+    </div>
+
+    <style>
+    .atlas-box img {
+        margin: 0;
+        padding: 0;
+        display: block;
+        width: 60px;
+        height: 60px;
+        float: left;
+    }
+    </style>
+
+{% endblock %}

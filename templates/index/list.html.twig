@@ -1,0 +1,74 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Название{% endblock %}
+
+{% block page_content %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Название</h3>
+            <div class="card-tools">
+{#                <a class="btn btn-success btn-sm" href="{{ path('calculate.item') }}" >Рассчитать элементы</a>#}
+{#                <a class="btn btn-success btn-sm" href="{{ path('parse.item.recursive') }}" >Обновить элементы рекурсивно</a>#}
+{#                <a class="btn btn-success btn-sm" href="{{ path('parse.list') }}" >Обновить</a>#}
+
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="tab-content" id="custom-content-below-tabContent">
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="10">№ п/п</th>
+                            <th>Название</th>
+                            <th>category</th>
+                            <th>stackSize</th>
+                            <th>wight</th>
+                            <th>maxCount</th>
+
+                            <th width="80">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, item in items %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('detail', {id: item.id}) }}" target="_blank"  class="btn btn-info btn-sm">
+                                        #{{ item.id }}
+                                    </a>
+                                    </td>
+
+                                <td><a href="{{ item.url }}" target="_blank">
+                                        <img src="{{ item.imgPath }}" alt="{{ item.label }}" width="30" height="30">
+                                        {{ item.label }}
+                                    </a>
+                                </td>
+                                <td>{{ item.category }}</td>
+                                <td>{{ item.stackSize }}</td>
+                                <td>{{ item.weight }}</td>
+                                <td>{{ item.maxCount }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ path('parse.item', {id: item.id}) }}"  class="btn btn-info btn-sm">
+                                            <span class="fas fa-upload"></span>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby=""></div>
+                <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby=""></div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Категории{% endblock %}
+
+{% block page_content %}
+
+    {% for key, items in categoryItems %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ key }}</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                {% for number, item in items %}
+                    <div class="col-md-2">
+                        <a href="{{ path('detail', {id: item.id}) }}" target="_blank">
+                            <img src="{{ item.img }}" alt="{{ item.label }}" width="30" height="30">
+                            {{ item.label }}
+                        </a>
+                    </div>
+                    {% if number%6 == 5 %}
+                        </div><div class="row">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+{% endblock %}

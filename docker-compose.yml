@@ -1,0 +1,29 @@
+version: '3'
+#https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: dockerfile/app
+      dockerfile: Dockerfile
+#    image: digitalocean.com/php
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    volumes:
+      - ./:/project
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    restart: unless-stopped
+    tty: true
+    ports:
+      - ${WEBSERVICE_HTTP_PORT}:80
+#      - "443:443"
+    volumes:
+      - ./:/project
+      - ./dockerfile/webserver/conf.d/:/etc/nginx/conf.d/

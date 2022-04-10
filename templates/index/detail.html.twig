@@ -1,0 +1,82 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Подробная информация | {{ path | default('root') }}{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Подробная информация</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="card-body">
+                        {% for property in properties %}
+                            <div class="form-group row">
+                                <label for="field-1" class="col-sm-4 col-form-label">{{ property.name }}</label>
+                                <div class="col-sm-8">
+                                    {% if property.type == 'propertyList' or property.type == 'table' %}
+                                        info
+                                    {% else %}
+                                        {{ data[property.name] | json_encode }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <div class="btn-group-vertical btn-block">
+                        </div>
+                    </div>
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <div class="card card-outline card-info">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Рецепты
+                    </h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            {% for property in table.property %}
+                                <th>{{ property.name }}</th>
+                            {% endfor %}
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% set list = data[table.name] %}
+                            {% for key, item  in list %}
+                                <tr>
+                                    {% for property in table.property %}
+                                        <td>
+                                            {% if property.type == 'propertyList' or property.type == 'table' %}
+                                                info
+                                            {% else %}
+                                                {{list[key][property.name] }}
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
