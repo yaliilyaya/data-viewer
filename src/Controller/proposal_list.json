@@ -2,6 +2,12 @@
   "procedure_id": 1725,
   "procedure_visible_id": "005056bc-b9c7-1edc-8ead-f140c8ec94ec",
   "type": "3",
+  "lots": [
+    {
+      "lot_id": 1727,
+      "nmck": "17146954.66"
+    }
+  ],
   "proposals": [
     {
       "sequence_number": 1,
