@@ -52,6 +52,9 @@ class IndexController extends AbstractController
             return $property['type'] == DetectFieldType::PROPERTY_LIST_TYPE;
         });
 
+//        dump($propertyList);
+//        die(__FILE__);
+
         return $this->render('index/detail.html.twig', [
             'data' => $data,
             'properties' => $properties,
