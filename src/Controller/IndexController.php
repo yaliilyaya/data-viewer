@@ -42,6 +42,7 @@ class IndexController extends AbstractController
     {
         $path = $request->get('q') ?: '';
         $data = $this->loadData('proposal_list.json', $path);
+        dump($data);
 
         $properties = $this->detectFieldType->detect($data, $path, 2);
         $tables = array_filter($properties, function ($property) {

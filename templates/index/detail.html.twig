@@ -21,11 +21,11 @@
                                 <label for="field-1" class="col-sm-4 col-form-label">{{ property.name }}</label>
                                 <div class="col-sm-8">
                                     {% if property.type == 'propertyList' %}
-                                        <a href="{{ path('detail') }}">info</a>
+                                        <a href="{{ path('detail') }}?q={{ path }}.{{ property.name }}">info</a>
                                     {% elseif property.type == 'table' %}
                                         <a href="#{{ property.name }}">table</a>
                                     {% else %}
-                                        {{ data[property.name] | json_encode }}
+                                        {{ data[property.name] }}
                                     {% endif %}
                                 </div>
                             </div>
@@ -76,9 +76,9 @@
                         {% for property in table.property %}
                             <td>
                                 {% if property.type == 'propertyList' %}
-                                    <a href="{{ path('detail') }}">info</a>
+                                    <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}.{{ property.name }}">info</a>
                                 {% elseif property.type == 'table' %}
-                                    <a href="{{ path('detail') }}">info</a>
+                                    <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}">info</a>
                                 {% else %}
                                     {{list[key][property.name] }}
                                 {% endif %}
