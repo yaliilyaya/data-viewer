@@ -119,7 +119,7 @@
                                 {% elseif property.type == 'table' %}
                                     <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}"
                                        tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ table.name }}.{{ key }}"
-                                    >info</a>
+                                    >table</a>
                                 {% else %}
                                     {{list[key][property.name] }}
                                 {% endif %}
