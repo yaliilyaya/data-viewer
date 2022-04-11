@@ -15,12 +15,13 @@
                 <form class="form-horizontal">
                     <div class="card-body">
                         {% for property in properties %}
-
                             <div class="form-group row">
                                 <label for="field-1" class="col-sm-4 col-form-label">{{ property.name }}</label>
                                 <div class="col-sm-8">
                                     {% if property.type == 'propertyList' %}
-                                        <a href="{{ path('detail') }}?q={{ path }}.{{ property.name }}">info</a>
+                                        <a href="{{ path('detail') }}?q={{ path }}.{{ property.name }}"
+                                           tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ property.name }}"
+                                        >info</a>
                                     {% elseif property.type == 'table' %}
                                         <a href="#{{ property.name }}">table</a>
                                     {% else %}
@@ -55,9 +56,13 @@
                                     <label for="field-1" class="col-sm-4 col-form-label">{{ property.name }}</label>
                                     <div class="col-sm-8">
                                         {% if property.type == 'propertyList' %}
-                                            <a href="{{ path('detail') }}?q={{ path }}.{{ propertyItem.name }}.{{ property.name }}">info</a>
+                                            <a href="{{ path('detail') }}?q={{ path }}.{{ propertyItem.name }}.{{ property.name }}"
+                                               tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ propertyItem.name }}.{{ property.name }}"
+                                            >info</a>
                                         {% elseif property.type == 'table' %}
-                                            <a href="{{ path('detail') }}?q={{ path }}.{{ propertyItem.name }}">info</a>
+                                            <a href="{{ path('detail') }}?q={{ path }}.{{ propertyItem.name }}"
+                                               tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ propertyItem.name }}"
+                                            >info</a>
                                         {% else %}
                                             {{ data[propertyItem.name][property.name] }}
                                         {% endif %}
@@ -100,16 +105,23 @@
                 {% for key, item  in list %}
                     <tr>
                         <td>
-                            <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}"  class="btn btn-info btn-sm">
+                            <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}"
+                               class="btn btn-info btn-sm"
+                               tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ table.name }}.{{ key }}"
+                            >
                                 <span class="fas fa-info"></span>
                             </a>
                         </td>
                         {% for property in table.property %}
                             <td>
                                 {% if property.type == 'propertyList' %}
-                                    <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}.{{ property.name }}">info</a>
+                                    <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}.{{ property.name }}"
+                                       tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ table.name }}.{{ key }}.{{ property.name }}"
+                                    >info</a>
                                 {% elseif property.type == 'table' %}
-                                    <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}">info</a>
+                                    <a href="{{ path('detail') }}?q={{ path }}.{{ table.name }}.{{ key }}"
+                                       tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ table.name }}.{{ key }}"
+                                    >info</a>
                                 {% else %}
                                     {{list[key][property.name] }}
                                 {% endif %}

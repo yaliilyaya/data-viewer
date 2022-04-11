@@ -30,12 +30,12 @@ class IndexController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('index/list.html.twig', [
-            'items' => []
-        ]);
+        return $this->redirectToRoute('detail');
     }
+
     /**
      * @Route("/detail", name="detail")
+     * @param Request $request
      * @return Response
      */
     public function detail(Request $request): Response
@@ -52,9 +52,6 @@ class IndexController extends AbstractController
             return $property['type'] == DetectFieldType::PROPERTY_LIST_TYPE;
         });
 
-//        dump($propertyList);
-//        die(__FILE__);
-
         return $this->render('index/detail.html.twig', [
             'data' => $data,
             'properties' => $properties,
@@ -64,6 +61,31 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/tooltip", name="tooltip")
+     * @param Request $request
+     * @return Response
+     */
+    public function tooltip(Request $request): Response
+    {
+        $path = $request->get('q') ?: '';
+        $data = $this->loadData('proposal_list.json', $path);
+        dump($data);
+
+        $properties = $this->detectFieldType->detect($data, $path, 2);
+
+        return $this->render('index/tooltip.html.twig', [
+            'data' => $data,
+            'properties' => $properties,
+            'path' => $path
+        ]);
+    }
+
+    /**
+     * @param string $fileName
+     * @param $dataPath
+     * @return mixed|null
+     */
     private function loadData(string $fileName, $dataPath)
     {
         $path = __DIR__ . '/' . $fileName;

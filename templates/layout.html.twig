@@ -11,10 +11,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
 
     {% set title = block("title") is defined  ? block('title') : 'СНТ "Старт"' %}
     <title>{{ title }}</title>
     {% block stylesheets %}{% endblock %}
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -70,6 +73,23 @@
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
+
+    <script>
+        $( function() {
+            $( document ).tooltip({
+                items: "[tooltip-href]",
+                content: function(callback) {
+                    var element = $( this );
+
+                    $.get(element.attr("tooltip-href"), function (data) {
+                        $.get(element.attr("tooltip-href"), function(data) {
+                            callback(data);
+                        });
+                    });
+                }
+            });
+        } );
+    </script>
 </div>
 <!-- ./wrapper -->
 {% block javascripts %}{% endblock %}

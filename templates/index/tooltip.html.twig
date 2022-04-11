@@ -1,0 +1,23 @@
+<div class="card card-info">
+    <form class="form-horizontal">
+        <div class="card-body">
+            {% for property in properties %}
+
+                <div class="form-group row">
+                    <label for="field-1" class="col-sm-4 col-form-label">{{ property.name }}</label>
+                    <div class="col-sm-8">
+                        {% if property.type == 'propertyList' %}
+                            <a href="{{ path('detail') }}?q={{ path }}.{{ property.name }}"
+                               tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ property.name }}"
+                            >info</a>
+                        {% elseif property.type == 'table' %}
+                            <a href="#{{ property.name }}">table</a>
+                        {% else %}
+                            {{ data[property.name] }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </form>
+</div>
