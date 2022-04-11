@@ -19,9 +19,7 @@
                                 <label for="field-1" class="col-sm-4 col-form-label">{{ property.name }}</label>
                                 <div class="col-sm-8">
                                     {% if property.type == 'propertyList' %}
-                                        <a href="{{ path('detail') }}?q={{ path }}.{{ property.name }}"
-                                           tooltip-href="{{ path('tooltip') }}?q={{ path }}.{{ property.name }}"
-                                        >info</a>
+                                        <a href="#{{ property.name }}">info</a>
                                     {% elseif property.type == 'table' %}
                                         <a href="#{{ property.name }}">table</a>
                                     {% else %}
@@ -45,7 +43,7 @@
             <div class="col-md-4">
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">{{ propertyItem.name }}</h3>
+                        <h3 class="card-title" id="{{ propertyItem.name }}">{{ propertyItem.name }}</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
